@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risk Radar – G7 &amp; EU Security Outlook</title>
+<meta name="description" content="Daily 30-day outlook of global security risks and national crisis risks for the G7 countries and the European Union. Open sources, transparent method, adjustable scenarios.">
+<meta property="og:title" content="Risk Radar – G7 &amp; EU Security Outlook">
+<meta property="og:description" content="Daily, source-linked 30-day outlook of global risks and national crisis risks for the G7 and the EU.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b10; --bg2:#0d121a; --panel:#111824; --panel2:#162030; --line:#223044; --line2:#2d3f58;
+  --txt:#dbe6f3; --dim:#8ea1b8; --faint:#5d6f86;
+  --cy:#3fd0ff; --cy2:#1b8fb5;
+  --g:#3ddc97; --y:#f3c94b; --o:#ff9a3c; --r:#ff4d5e; --m:#d64dff; --rt:#ff7ad9;
+  --hud:'Rajdhani',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.5}
+body{background:
+  radial-gradient(1200px 600px at 80% -10%, rgba(63,208,255,.08), transparent 60%),
+  radial-gradient(900px 500px at -10% 30%, rgba(214,77,255,.05), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 3px),
+  var(--bg);min-height:100vh}
+a{color:var(--cy);text-decoration:none} a:hover{text-decoration:underline}
+button{font-family:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:16px 14px 96px}
+.dim{color:var(--dim)} .faint{color:var(--faint)}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;flex:none}
+.brand h1{margin:0;font-family:var(--hud);font-size:24px;letter-spacing:.14em;font-weight:700}
+.brand small{display:block;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.04em}
+.status{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--g);margin-right:6px;box-shadow:0 0 8px var(--g);vertical-align:1px}
+.dot.warn{background:var(--y);box-shadow:0 0 8px var(--y)}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;white-space:nowrap;margin:0 0 14px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;background:rgba(8,11,16,.94);backdrop-filter:blur(4px);padding-top:6px}
+.tab{background:transparent;border:0;border-bottom:3px solid transparent;padding:8px 12px 9px;font-family:var(--hud);font-weight:700;letter-spacing:.14em;font-size:15px;color:var(--dim);cursor:pointer;text-transform:uppercase}
+.tab.on{color:var(--txt);border-bottom-color:var(--cy)}
+.tab .badge{font-family:var(--mono);font-size:10px;letter-spacing:0;background:var(--panel2);border:1px solid var(--line2);border-radius:999px;padding:0 6px;margin-left:5px;color:var(--dim)}
+
+.hero{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:860px){.hero{grid-template-columns:360px 1fr}}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:12px;position:relative}
+.card.pad{padding:16px}
+.corner:before,.corner:after{content:"";position:absolute;width:12px;height:12px;border-color:var(--cy);opacity:.7}
+.corner:before{top:-1px;left:-1px;border-top:2px solid;border-left:2px solid;border-top-left-radius:12px}
+.corner:after{bottom:-1px;right:-1px;border-bottom:2px solid;border-right:2px solid;border-bottom-right-radius:12px}
+.gauge{display:flex;flex-direction:column;align-items:center;padding:14px 14px 16px}
+.gauge svg{width:100%;max-width:320px;height:auto;display:block}
+.glabel{font-family:var(--hud);font-size:13px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;text-align:center}
+.gval{font-family:var(--hud);font-weight:700;font-size:54px;line-height:1;margin-top:-6px}
+.gsub{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:4px;text-align:center}
+.level{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:999px;font-family:var(--hud);font-weight:700;letter-spacing:.12em;font-size:13px;border:1px solid currentColor}
+.rtline{margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--rt);text-align:center}
+.sub2{margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--dim);text-align:center}
+.brief h2{margin:0 0 8px;font-family:var(--hud);font-size:15px;letter-spacing:.12em;color:var(--cy);text-transform:uppercase}
+.brief .head{font-size:17px;font-weight:600;line-height:1.45;margin:0 0 10px}
+.brief p{margin:0 0 10px;color:#c5d3e3}
+.since{border-left:3px solid var(--m);padding:8px 12px;background:rgba(214,77,255,.06);border-radius:0 8px 8px 0;font-size:14px;margin-bottom:8px}
+.since b{font-family:var(--hud);letter-spacing:.1em;color:var(--m);font-size:12px;display:block}
+.since.rt{border-left-color:var(--rt);background:rgba(255,122,217,.06)}
+.since.rt b{color:var(--rt)}
+
+.watch{display:flex;gap:8px;overflow-x:auto;padding:2px 0 4px;margin:14px 0 4px;scrollbar-width:thin}
+.chip{flex:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:150px}
+.chip .k{font-family:var(--hud);font-size:12px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.chip .v{font-family:var(--mono);font-size:18px;font-weight:500}
+.chip .n{font-size:11px;color:var(--faint)}
+
+.sect{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 0 10px;flex-wrap:wrap}
+.sect h3{margin:0;font-family:var(--hud);font-size:17px;letter-spacing:.14em;text-transform:uppercase}
+.sect .aside{font-size:12px;color:var(--dim)}
+
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.fc{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center;padding:12px 12px 12px 10px;cursor:pointer;text-align:left;width:100%;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:12px;transition:border-color .15s, transform .15s}
+.fc:hover,.fc:focus-visible{border-color:var(--cy2);outline:none;transform:translateY(-1px)}
+.fc .tag{font-family:var(--hud);font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.fc .nm{font-weight:600;font-size:15px;line-height:1.3;margin:1px 0 5px}
+.fc .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px}
+.pips{display:inline-flex;gap:2px} .pip{width:8px;height:8px;border-radius:2px;background:var(--line2)} .pip.on{background:var(--o)}
+.band{font-family:var(--hud);font-weight:700;letter-spacing:.1em;font-size:11px;padding:1px 7px;border-radius:4px;border:1px solid currentColor}
+.delta{font-family:var(--mono);font-size:12px}
+.delta.up{color:var(--r)} .delta.down{color:var(--g)} .delta.flat{color:var(--dim)} .delta.new{color:var(--cy)}
+.rtc{font-family:var(--mono);font-size:11px;color:var(--rt)}
+.rtc.big{font-weight:600}
+.ring{position:relative;width:68px;height:68px}
+.ring svg{width:68px;height:68px;transform:rotate(-90deg)}
+.ring .rv{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--hud);font-weight:700;font-size:20px;line-height:1}
+.ring .rv small{font-family:var(--mono);font-weight:400;font-size:9px;color:var(--dim);margin-top:2px}
+.mod{color:var(--y)}
+
+.two{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:860px){.two{grid-template-columns:1fr 1fr}}
+.cal{list-style:none;margin:0;padding:0}
+.cal li{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.cal li:last-child{border-bottom:0}
+.cal .d{font-family:var(--mono);font-size:12px;color:var(--cy)}
+.hist svg{width:100%;height:auto;display:block}
+select{background:var(--panel2);border:1px solid var(--line2);color:var(--txt);border-radius:6px;padding:4px 6px;font-family:var(--sans);font-size:13px;max-width:100%}
+
+table.rs{width:100%;border-collapse:collapse;font-size:13px}
+table.rs td,table.rs th{padding:6px 4px;border-bottom:1px dashed var(--line);text-align:left;vertical-align:top}
+table.rs th{font-family:var(--hud);letter-spacing:.1em;font-size:12px;color:var(--dim);text-transform:uppercase}
+
+/* sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(3,6,10,.72);backdrop-filter:blur(3px);z-index:20;display:none}
+.sheet-bg.on{display:block}
+.sheet{position:fixed;z-index:21;inset:0;overflow-y:auto;display:none}
+.sheet.on{display:block}
+.sheet-inner{max-width:860px;margin:0 auto;min-height:100%;background:var(--bg2);border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 0 110px}
+@media(min-width:900px){.sheet-inner{margin:24px auto;min-height:auto;border:1px solid var(--line2);border-radius:14px}}
+.sh-top{position:sticky;top:0;z-index:2;background:rgba(13,18,26,.96);border-bottom:1px solid var(--line);padding:12px 14px;display:flex;align-items:center;gap:12px}
+.sh-top .tt{flex:1;min-width:0}
+.sh-top .tt .tag{font-family:var(--hud);font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.sh-top .tt h2{margin:0;font-size:18px;line-height:1.25}
+.x{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;width:38px;height:38px;font-size:20px;cursor:pointer;flex:none}
+.sh-body{padding:14px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+@media(min-width:600px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
+.kpi .k{font-family:var(--hud);font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.kpi .v{font-family:var(--hud);font-weight:700;font-size:26px;line-height:1.1}
+.kpi .s{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+.box h4{margin:0 0 6px;font-family:var(--hud);font-size:13px;letter-spacing:.14em;color:var(--cy);text-transform:uppercase}
+.box p{margin:0}
+.box.fl{border-color:rgba(63,208,255,.35);background:linear-gradient(180deg,rgba(63,208,255,.06),var(--panel))}
+.box.rt{border-color:rgba(255,122,217,.35);background:linear-gradient(180deg,rgba(255,122,217,.06),var(--panel))}
+.box.rt h4{color:var(--rt)}
+.box.out{border-style:dashed}
+.drv{border-top:1px solid var(--line);padding:12px 0}
+.drv:first-of-type{border-top:0}
+.drv .row1{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.drv .t{font-weight:500;font-size:14px;line-height:1.35}
+.drv .why{font-size:12.5px;color:var(--dim);margin-top:3px}
+.drv .pv{font-family:var(--hud);font-weight:700;font-size:20px;min-width:52px;text-align:right}
+.drv .row2{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.eff{font-family:var(--mono);font-size:11px;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.eff.pos{color:var(--r);background:rgba(255,77,94,.1)} .eff.neg{color:var(--g);background:rgba(61,220,151,.1)}
+.hz{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.multi{font-family:var(--mono);font-size:11px;color:var(--m)}
+.qbtn{background:var(--panel2);border:1px solid var(--line2);border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer}
+.qbtn:hover{border-color:var(--cy2)}
+.qbtn.on{border-color:var(--cy);color:var(--cy)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:4px 0 0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--g),var(--y),var(--r))}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--g),var(--y),var(--r))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--cy);margin-top:-7px;box-shadow:0 0 0 3px rgba(63,208,255,.2)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--cy)}
+input[type=range]:disabled{opacity:.4}
+.slwrap{position:relative;flex:1 1 100%}
+.basemark{position:absolute;top:2px;width:2px;height:24px;background:rgba(255,255,255,.55);pointer-events:none}
+.src{list-style:none;margin:0;padding:0}
+.src li{padding:5px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.src li:last-child{border-bottom:0}
+.exp{display:flex;flex-wrap:wrap;gap:6px}
+.exp span{font-size:12px;border:1px solid var(--line2);border-radius:999px;padding:2px 9px;color:var(--dim)}
+
+.scen{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;justify-content:center;padding:10px;pointer-events:none}
+.scen.on{display:flex}
+.scen .in{pointer-events:auto;display:flex;align-items:center;gap:12px;background:#231a05;border:1px solid var(--y);color:var(--y);border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:640px;width:100%}
+.scen .in .txt{flex:1;font-size:13px;line-height:1.35}
+.scen .in b{font-family:var(--hud);letter-spacing:.12em}
+.scen button{background:var(--y);color:#1a1300;border:0;border-radius:8px;padding:8px 12px;font-weight:600;cursor:pointer}
+
+.method{font-size:13.5px;color:#c0cddc}
+.method p{margin:0 0 8px}
+.loading{padding:40px 0;text-align:center;color:var(--dim);font-family:var(--mono);font-size:13px}
+.note{margin:10px 0;padding:10px 12px;border:1px solid var(--y);border-radius:8px;color:var(--y);font-size:13px;display:none}
+.note.on{display:block}
+footer{margin-top:24px;font-size:12px;color:var(--faint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#3fd0ff" stroke-opacity=".35"/>
+        <circle cx="20" cy="20" r="11" fill="none" stroke="#3fd0ff" stroke-opacity=".55"/>
+        <circle cx="20" cy="20" r="4" fill="#3fd0ff"/>
+        <path d="M20 20 L36 12" stroke="#3fd0ff" stroke-width="2"/>
+        <circle cx="30" cy="11" r="2.4" fill="#ff4d5e"/>
+      </svg>
+      <div><h1>RISK RADAR</h1><small id="subtitle">global · G7 · EU · 30-day outlook</small></div>
+    </div>
+    <div class="status" id="status"><span class="dot warn"></span>Connecting…</div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-t="global">Global</button>
+  </nav>
+  <div class="note" id="note"></div>
+  <div id="app"><div class="loading">Loading latest analysis…</div></div>
+  <footer><div id="foot"></div><p style="margin-top:8px;max-width:760px">Risk Radar is an independent, AI-assisted assessment based on open sources. Probabilities are analytical judgements, not forecasts or advice, and can be wrong. Sources are linked under each factor.</p></footer>
+</div>
+
+<div class="sheet-bg" id="sheetbg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+
+<div class="scen" id="scen"><div class="in">
+  <div class="txt"><b>SCENARIO MODE</b><br><span id="scentxt"></span></div>
+  <button id="reset">Reset</button>
+</div></div>
+
+<script>
+(function(){
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const clamp = (p,a=0.001,b=0.999) => Math.min(b, Math.max(a, p));
+const logit = p => Math.log(clamp(p)/(1-clamp(p)));
+const sig = x => 1/(1+Math.exp(-x));
+const num = x => typeof x==="number" && isFinite(x);
+const pct = (p,d=0) => { if(d===0&&H30&&p>0&&p<0.1) d=1; return (p*100).toFixed(d) + "%"; };
+const rv = p => (H30&&p<0.1)?(p*100).toFixed(1):Math.round(p*100);
+const pp = x => (Math.abs(x)<0.0005?"±":x>0?"+":"−") + Math.abs(x*100).toFixed(1) + " pp";
+const safeUrl = u => /^https:\/\//i.test(String(u||"")) ? u : "#";
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtDate(d){ const m=String(d||"").match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/); if(!m) return esc(d); return (m[3]? (+m[3])+" ":"") + MON[+m[2]-1] + " " + m[1]; }
+function osloToday(){ try{ return new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Oslo"}).format(new Date()); }catch(e){ return new Date().toISOString().slice(0,10); } }
+let H30=false;
+const FT=()=>H30?[.05,.15,.35,.60]:[.10,.25,.50,.75];
+const GT=()=>H30?[.02,.04,.07,.12]:[.10,.20,.30,.45];
+function riskColor(p){ const t=FT(); return p<t[0]?"var(--g)":p<t[1]?"#9be15d":p<t[2]?"var(--y)":p<t[3]?"var(--o)":"var(--r)"; }
+function band(p){ const t=FT(); return p<t[0]?"LOW":p<t[1]?"MODERATE":p<t[2]?"ELEVATED":p<t[3]?"HIGH":"VERY HIGH"; }
+function globalLevel(p){ const t=GT(); return p<t[0]?["LEVEL 1 · LOW","var(--g)"]:p<t[1]?["LEVEL 2 · MODERATE","#9be15d"]:p<t[2]?["LEVEL 3 · ELEVATED","var(--y)"]:p<t[3]?["LEVEL 4 · HIGH","var(--o)"]:["LEVEL 5 · CRITICAL","var(--r)"]; }
+
+// ---------- state ----------
+const S = { snaps:[], cur:null, prev:null, reds:[], red:null, ov:{}, db:null, open:null, tab:"global", histSel:"global" };
+
+// ---------- normalize snapshot ----------
+function normalize(raw){
+  const s = JSON.parse(JSON.stringify(raw));
+  if(s.h30){ const o=s.h30, br=o.BR||{};
+    const ap=x=>{ if(o.F&&o.F[x.id]!=null) x.P=o.F[x.id]; if(o.O&&o.O[x.id]) x.outcome=o.O[x.id]; if(o.GS&&o.GS[x.id]!=null) x.spill=o.GS[x.id]; if(o.D&&o.D[x.id]!=null){ x.p=o.D[x.id]; if(o.H&&o.H[x.id]) x.h=o.H[x.id]; } };
+    (s.factors||[]).forEach(ap); (s.drivers||[]).forEach(ap);
+    [s.norway].concat(s.countries||[]).forEach(c=>{ if(!c) return; const code=(c===s.norway)?"no":c.code; if(br[code]!=null) c.baseRate=br[code]; if(o.CS&&o.CS[code]) c.spill=Object.assign({}, c.spill, o.CS[code]); (c.factors||[]).forEach(ap); (c.drivers||[]).forEach(ap); });
+  }
+  const C = [];
+  if(s.norway && Array.isArray(s.norway.factors)) C.push(Object.assign({code:"no", name:"Norway", tab:"norge"}, s.norway));
+  if(Array.isArray(s.countries)) s.countries.forEach(c=>{ if(c && c.code && Array.isArray(c.factors) && c.code!=="no") C.push(Object.assign({tab:c.code}, c)); });
+  s.C = C; s.Cmap = {}; C.forEach(c=>s.Cmap[c.code]=c);
+  const links = {};
+  C.forEach(c=>{ const L=c.links||{}; for(const k in L) links[k]=Object.assign(links[k]||{}, L[k]); });
+  s.gF = (s.factors||[]).filter(f=>!f.scope);
+  s.nF = []; C.forEach(c=>c.factors.forEach(f=>s.nF.push(Object.assign({}, f, {scope:c.code}))));
+  s.allF = s.gF.concat(s.nF);
+  let D = (s.drivers||[]).slice(); C.forEach(c=>{ if(Array.isArray(c.drivers)) D=D.concat(c.drivers); });
+  s.D = D.map(d=>{ const imp=Object.assign({}, d.imp||{}, links[d.id]||{}); return Object.assign({}, d, {imp}); });
+  s.Dmap = {}; s.D.forEach(d=>s.Dmap[d.id]=d);
+  s.Fmap = {}; s.allF.forEach(f=>s.Fmap[f.id]=f);
+  s.seasonEnd = (s.season&&s.season.end) || "2027-10-31";
+  s.rb = id => (s.resolveBy&&s.resolveBy[id]) || s.seasonEnd;
+  return s;
+}
+
+// ---------- model ----------
+function pOf(id){ if(S.ov[id]!=null) return S.ov[id]; const d=S.cur.Dmap[id]; return d?d.p:0; }
+function factorP(snap, f, getP){
+  let s0=0, s1=0;
+  for(const d of snap.D){ const w=d.imp[f.id]; if(!num(w)) continue; s0+=w*d.p; s1+=w*getP(d.id,d); }
+  return sig(logit(f.P) + s1 - s0);
+}
+function allP(snap, getP){ const o={}; for(const f of snap.allF) o[f.id]=factorP(snap,f,getP); return o; }
+function globalP(snap, Ps){
+  const m=snap.method||{}; const base=num(m.baseRate)?m.baseRate:0.02; const corr=num(m.correlation)?m.correlation:0.85;
+  let prod=1-base; for(const f of snap.gF) prod*=1-((Ps[f.id]||0)*(f.spill||0));
+  return corr*(1-prod);
+}
+function norwayP(snap, Ps){ return countryP(snap,"no",Ps); }
+function countryP(snap, code, Ps){
+  const n=snap.Cmap&&snap.Cmap[code]; if(!n) return null;
+  const base=num(n.baseRate)?n.baseRate:0.01, corr=num(n.correlation)?n.correlation:0.85, sp=n.spill||{};
+  let prod=1-base; for(const id in sp){ if(Ps[id]==null) continue; prod*=1-(Ps[id]*sp[id]); }
+  return corr*(1-prod);
+}
+function anyCountry(snap, code, Ps){ let prod=1; for(const f of snap.nF) if(f.scope===code) prod*=1-(Ps[f.id]||0); return 1-prod; }
+const baseGet=(id,d)=>d.p, curGet=id=>pOf(id);
+function driverEffect(f,d){ const g1=id=>id===d.id?1:pOf(id), g0=id=>id===d.id?0:pOf(id); return factorP(S.cur,f,g1)-factorP(S.cur,f,g0); }
+function driversFor(f){
+  const order=f.drivers||[];
+  return S.cur.D.filter(d=>num(d.imp[f.id])).sort((a,b)=>{ const ia=order.indexOf(a.id), ib=order.indexOf(b.id);
+    if(ia>=0&&ib>=0) return ia-ib; if(ia>=0) return -1; if(ib>=0) return 1; return Math.abs(b.imp[f.id])-Math.abs(a.imp[f.id]); });
+}
+// red team
+function redPs(rd, snap){ // factor probabilities of red team, filled with analyst values where missing
+  if(!rd) return null; const o={}; for(const f of snap.allF) o[f.id]= num(rd.factors&&rd.factors[f.id]) ? rd.factors[f.id] : null; return o;
+}
+function redGlobal(rd, snap){ const R=redPs(rd,snap); if(!R) return null; const P={}; let n=0; for(const f of snap.allF){ P[f.id]= R[f.id]!=null?R[f.id]:f.P; if(R[f.id]!=null) n++; } if(!n) return null; const c={}; for(const k of snap.C){ if(snap.nF.some(f=>f.scope===k.code&&R[f.id]!=null)) c[k.code]=countryP(snap,k.code,P); } return {g:globalP(snap,P), no:c.no, c}; }
+
+// ---------- rendering helpers ----------
+function ring(p, size=68, stroke=7, color){
+  const r=(size-stroke)/2, c=2*Math.PI*r, off=c*(1-p);
+  return `<svg viewBox="0 0 ${size} ${size}" style="width:${size}px;height:${size}px"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#1d2838" stroke-width="${stroke}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}" style="transition:stroke-dashoffset .5s"/></svg>`;
+}
+function gaugeSVG(p, rp){
+  const cx=160, cy=150, r=120, a0=Math.PI, a1=0;
+  const arc=(from,to,col,w)=>{ const x0=cx+r*Math.cos(from), y0=cy-r*Math.sin(from), x1=cx+r*Math.cos(to), y1=cy-r*Math.sin(to); return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}" stroke="${col}" stroke-width="${w}" fill="none"/>`; };
+  const g=GT(), MX=H30?0.15:0.6; const scale=[[0,g[0],"#3ddc97"],[g[0],g[1],"#9be15d"],[g[1],g[2],"#f3c94b"],[g[2],g[3],"#ff9a3c"],[g[3],1,"#ff4d5e"]];
+  const mapP=x=>Math.min(1,x/MX);
+  let segs=""; for(const [lo,hi,col] of scale){ const f=mapP(lo), t=mapP(Math.min(hi,MX)); if(f>=1) continue; segs+=arc(a0-(a0-a1)*f, a0-(a0-a1)*t, col, 14); }
+  const ang=a0-(a0-a1)*mapP(p); const nx=cx+(r-26)*Math.cos(ang), ny=cy-(r-26)*Math.sin(ang);
+  let rt=""; if(rp!=null){ const ra=a0-(a0-a1)*mapP(rp); const x0=cx+(r-12)*Math.cos(ra), y0=cy-(r-12)*Math.sin(ra), x1=cx+(r+14)*Math.cos(ra), y1=cy-(r+14)*Math.sin(ra); rt=`<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="#ff7ad9" stroke-width="4" stroke-linecap="round"><title>Red team ${pct(rp)}</title></line>`; }
+  let ticks=""; for(const t of [0].concat(g,[MX])){ const an=a0-(a0-a1)*mapP(t); const x0=cx+(r+12)*Math.cos(an), y0=cy-(r+12)*Math.sin(an); ticks+=`<text x="${x0.toFixed(1)}" y="${(y0+4).toFixed(1)}" fill="#5d6f86" font-family="IBM Plex Mono" font-size="10" text-anchor="middle">${Math.round(t*100)}${t===MX?"+":""}</text>`; }
+  return `<svg viewBox="0 0 320 170" role="img" aria-label="Risk ${pct(p)}"><path d="M${cx-r} ${cy} A${r} ${r} 0 0 1 ${cx+r} ${cy}" stroke="#152031" stroke-width="22" fill="none"/>${segs}${ticks}${rt}<line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="7" fill="#fff"/><circle cx="${cx}" cy="${cy}" r="3" fill="#080b10"/></svg>`;
+}
+function deltaHTML(cur, prev){
+  if(prev==null) return `<span class="delta new">NEW</span>`;
+  const d=cur-prev; if(Math.abs(d)<0.005) return `<span class="delta flat">▬ ${pp(d)}</span>`;
+  return d>0?`<span class="delta up">▲ ${pp(d)}</span>`:`<span class="delta down">▼ ${pp(d)}</span>`;
+}
+function pips(n){ let h='<span class="pips" title="Severity '+n+'/5">'; for(let i=1;i<=5;i++) h+=`<span class="pip${i<=n?" on":""}"></span>`; return h+"</span>"; }
+function rtTag(p, rp){ if(rp==null) return ""; const d=rp-p; return `<span class="rtc${Math.abs(d)>=0.10?" big":""}" title="Red team">RT ${Math.round(rp*100)}${Math.abs(d)>=0.10?" ⚑":""}</span>`; }
+
+function factorCards(list, now, base, prevP, R){
+  let h=`<div class="grid">`;
+  const sorted=[...list].sort((a,b)=>now[b.id]*(b.severity||3)-now[a.id]*(a.severity||3));
+  for(const f of sorted){
+    const p=now[f.id], col=riskColor(p);
+    const pv = prevP && prevP[f.id]!=null ? prevP[f.id] : null;
+    h+=`<button class="fc" data-f="${esc(f.id)}" aria-label="${esc(f.name)}: ${pct(p)}">
+      <div class="ring">${ring(p,68,7,col)}<div class="rv" style="color:${col}">${rv(p)}<small>%</small></div></div>
+      <div><div class="tag">${esc(f.tag)}</div><div class="nm">${esc(f.name)}</div>
+      <div class="meta"><span class="band" style="color:${col}">${band(p)}</span>${pips(f.severity||3)}
+      ${Math.abs(p-base[f.id])>0.0005?`<span class="delta mod">scenario ${pp(p-base[f.id])}</span>`:deltaHTML(base[f.id],pv)}
+      ${R?rtTag(base[f.id],R[f.id]):""}</div></div>
+    </button>`;
+  }
+  return h+`</div>`;
+}
+function watchHTML(w){ return Array.isArray(w)&&w.length?`<div class="watch">`+w.map(x=>`<div class="chip"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="n">${esc(x.n)}</div></div>`).join("")+`</div>`:""; }
+
+// ---------- views ----------
+function render(){
+  const s=S.cur; if(!s) return; H30=(s.horizonDays||365)<=45;
+  if(S.tab!=="global" && !s.C.some(c=>c.tab===S.tab)) S.tab="global";
+  $("#tabs").innerHTML=[{tab:"global",name:"Global"}].concat(s.C).map(c=>`<button class="tab${c.tab===S.tab?" on":""}" data-t="${esc(c.tab)}">${esc(c.name)}</button>`).join("");
+  const base=allP(s,baseGet), now=allP(s,curGet);
+  const prevP = S.prev ? allP(S.prev, baseGet) : null;
+  const R = redPs(S.red, s), RG = redGlobal(S.red, s);
+  let h="";
+  if(S.tab==="global") h=viewGlobal(s,base,now,prevP,R,RG);
+  else { const c=s.C.find(c=>c.tab===S.tab); if(c) h=viewCountry(s,c,base,now,prevP,R,RG); }
+  $("#app").innerHTML=h;
+  document.querySelectorAll(".fc").forEach(b=>b.addEventListener("click",()=>openFactor(b.dataset.f)));
+  const hs=$("#histsel"); if(hs){ hs.value=S.histSel; hs.addEventListener("change",e=>{S.histSel=e.target.value; $("#histbox").innerHTML=histSVG();}); }
+  const n=Object.keys(S.ov).length;
+  $("#scen").classList.toggle("on", n>0);
+  if(n>0){ const gB=globalP(s,base), gN=globalP(s,now);
+    $("#scentxt").textContent=`${n} driver${n>1?"s":""} changed. Global ${pct(gB)} → ${pct(gN)}`+s.C.map(c=>` · ${c.name} ${pct(countryP(s,c.code,base))} → ${pct(countryP(s,c.code,now))}`).join(""); }
+  $("#foot").innerHTML=`Analysis ${esc(fmtDate(s.date))}${s.generatedAt?" · "+esc(String(s.generatedAt).slice(11,16))+" Oslo":""} · ${S.snaps.length} snapshot${S.snaps.length===1?"":"s"}${S.reds.length?` · ${S.reds.length} red-team round${S.reds.length===1?"":"s"}`:""}`;
+  if(S.open) renderSheet();
+}
+
+function viewGlobal(s,base,now,prevP,R,RG){
+  const gBase=globalP(s,base), gNow=globalP(s,now), gPrev=S.prev?globalP(S.prev,prevP):null;
+  const modded=Object.keys(S.ov).length>0; const [lvl,lcol]=globalLevel(gNow);
+  let h=`<div class="hero"><div class="card corner gauge">
+      <div class="glabel">Probability of global shock · 30 days</div>${gaugeSVG(gNow, RG?RG.g:null)}
+      <div class="gval" style="color:${lcol}">${pct(gNow)}</div>
+      <div class="gsub">${modded?`<span class="mod">Scenario · baseline ${pct(gBase)}</span>`:(gPrev!=null?`Since last snapshot: ${deltaHTML(gNow,gPrev)}`:"First snapshot")}</div>
+      <span class="level" style="color:${lcol}">${lvl}</span>
+      ${RG?`<div class="rtline">Red team (${esc(fmtDate(S.red.date))}): ${pct(RG.g)} · ${pp(RG.g-gBase)} vs analyst</div>`:""}
+    </div>
+    <div class="card pad brief"><h2>Situation · ${fmtDate(s.date)}</h2>
+      <p class="head">${esc(s.headline)}</p><p>${esc(s.globalSummary)}</p>
+      <div class="since"><b>SINCE LAST</b>${esc(s.sinceLast)}</div>
+      ${S.red&&S.red.summary?`<div class="since rt"><b>RED TEAM VIEW</b>${esc(S.red.summary)}</div>`:""}
+    </div></div>`;
+  h+=watchHTML(s.watch);
+  h+=`<div class="sect"><h3>Risk factors</h3><span class="aside">Tap a factor for drivers, sources and scenarios</span></div>`;
+  h+=factorCards(s.gF, now, base, prevP, R);
+  h+=`<div class="two" style="margin-top:22px"><div class="card pad"><div class="sect" style="margin:0 0 6px"><h3>Upcoming triggers</h3></div><ul class="cal">`+
+    (s.calendar||[]).map(c=>`<li><span class="d">${fmtDate(c.d)}</span><span>${esc(c.t)}</span></li>`).join("")+`</ul></div>
+    <div class="card pad hist"><div class="sect" style="margin:0 0 6px"><h3>History</h3>
+      <select id="histsel" aria-label="Select series"><option value="global">Global shock</option>${s.C.map(c=>`<option value="c:${esc(c.code)}">National crisis in ${esc(c.place||c.name)}</option>`).join("")}${s.allF.map(f=>`<option value="${esc(f.id)}">${esc(f.name)}</option>`).join("")}</select></div>
+      <div id="histbox">${histSVG()}</div></div></div>`;
+  h+=`<div class="sect"><h3>Method</h3></div><div class="card pad method">
+    <p><b>Horizon:</b> ${esc(s.horizon)}.</p>
+    <p><b>Factor model:</b> ${esc(s.method&&s.method.factorModel)}</p>
+    <p><b>Global probability:</b> ${esc(s.method&&s.method.globalModel)}</p>
+    <p><b>Definition of global shock:</b> ${esc(s.method&&s.method.blackSwanDefinition)}</p>
+    <p class="faint"><b>Sources:</b> Each factor draws on established research institutes, primary data (IAEA, IMF, FAO, NOAA, WHO), regional specialists and, where available, prediction markets, with sources chosen to span the political spectrum. The numbers are judgements based on open sources; they are meant for structured thinking about risk, not as precise forecasts.</p></div>`;
+  return h;
+}
+
+function viewCountry(s,n,base,now,prevP,R,RG){
+  const code=n.code, place=n.place||n.name;
+  const nB=countryP(s,code,base), nN=countryP(s,code,now), nPrev=S.prev&&S.prev.Cmap&&S.prev.Cmap[code]?countryP(S.prev,code,prevP):null;
+  const any=anyCountry(s,code,now); const rc=RG&&RG.c?RG.c[code]:null; const modded=Object.keys(S.ov).length>0; const [lvl,lcol]=globalLevel(nN);
+  let h=`<div class="hero"><div class="card corner gauge">
+      <div class="glabel">National crisis in ${esc(place)} · 30 days</div>${gaugeSVG(nN, rc!=null?rc:null)}
+      <div class="gval" style="color:${lcol}">${pct(nN)}</div>
+      <div class="gsub">${modded?`<span class="mod">Scenario · baseline ${pct(nB)}</span>`:(nPrev!=null?`Since last snapshot: ${deltaHTML(nN,nPrev)}`:"First snapshot")}</div>
+      <span class="level" style="color:${lcol}">${lvl}</span>
+      <div class="sub2">At least one of the events below: ${pct(any)}</div>
+      ${rc!=null?`<div class="rtline">Red team: ${pct(rc)} · ${pp(rc-nB)}</div>`:""}
+    </div>
+    <div class="card pad brief"><h2>${esc(n.name)} · ${fmtDate(s.date)}</h2>
+      <p class="head">${esc(n.headline)}</p><p>${esc(n.summary)}</p>
+      <div class="since"><b>SINCE LAST</b>${esc(n.sinceLast)}</div></div></div>`;
+  h+=watchHTML(n.watch);
+  if(Array.isArray(n.calendar)&&n.calendar.length) h+=`<div class="card pad" style="margin-top:14px"><div class="sect" style="margin:0 0 6px"><h3>Upcoming in ${esc(place)}</h3></div><ul class="cal">`+n.calendar.map(c=>`<li><span class="d">${fmtDate(c.d)}</span><span>${esc(c.t)}</span></li>`).join("")+`</ul></div>`;
+  h+=`<div class="sect"><h3>Threats to residents of ${esc(place)}</h3><span class="aside">Each card includes preparedness advice</span></div>`;
+  h+=factorCards(s.nF.filter(f=>f.scope===code), now, base, prevP, R);
+  const glob=Object.keys(n.spill||{}).filter(id=>s.Fmap[id]&&!s.Fmap[id].scope);
+  if(glob.length){
+    h+=`<div class="sect"><h3>Global factors affecting ${esc(place)}</h3><span class="aside">Share that becomes a national crisis here</span></div><div class="card pad"><table class="rs"><tr><th>Factor</th><th>Global P</th><th>Share</th><th>Contribution</th></tr>`+
+      glob.map(id=>{ const f=s.Fmap[id]; return `<tr><td>${esc(f.name)}</td><td>${pct(now[id])}</td><td>${Math.round(n.spill[id]*100)}%</td><td>${pct(now[id]*n.spill[id],1)}</td></tr>`; }).join("")+`</table></div>`;
+  }
+  h+=`<div class="sect"><h3>Method</h3></div><div class="card pad method"><p>${esc(n.method)}</p>
+    <p class="faint">${esc(n.sourcesNote||"Sources are listed under each factor.")} The assessment applies to residents in general, not specific locations or organisations.</p></div>`;
+  return h;
+}
+
+function histSVG(){
+  const hz=S.cur.horizonDays||365; const pts=[...S.snaps].filter(sn=>(sn.horizonDays||365)===hz).sort((a,b)=>a.date<b.date?-1:1).map(sn=>{
+    const P=allP(sn,baseGet); let v=null;
+    if(S.histSel==="global") v=globalP(sn,P); else if(S.histSel.startsWith("c:")) v=countryP(sn,S.histSel.slice(2),P); else v=P[S.histSel]??null;
+    return {d:sn.date, v};
+  }).filter(x=>x.v!=null);
+  const rpts=S.reds.slice().sort((a,b)=>a.date<b.date?-1:1).map(rd=>{ const g=redGlobal(rd,S.cur); let v=null;
+    if(S.histSel==="global") v=g&&g.g; else if(S.histSel.startsWith("c:")) v=g&&g.c?g.c[S.histSel.slice(2)]:null; else v=num(rd.factors&&rd.factors[S.histSel])?rd.factors[S.histSel]:null; return {d:rd.date,v}; }).filter(x=>x.v!=null);
+  if(pts.length<2){ const v=pts[0]?pct(pts[0].v):"–"; return `<p class="dim" style="margin:6px 0 0;font-size:13px">One snapshot so far (${v}). The 30-day curve builds with each daily update; earlier 12-month snapshots are not mixed in.</p>`; }
+  const W=520,H=180,L=36,R=10,T=10,B=26;
+  const dates=[...new Set(pts.map(p=>p.d).concat(rpts.map(p=>p.d)))].sort();
+  const t0=new Date(dates[0]).getTime(), t1=new Date(dates[dates.length-1]).getTime()||t0+1;
+  const vs=pts.map(p=>p.v).concat(rpts.map(p=>p.v)); let lo=Math.min(...vs), hi=Math.max(...vs); const pad=Math.max(0.03,(hi-lo)*0.2); lo=Math.max(0,lo-pad); hi=Math.min(1,hi+pad);
+  const x=d=>L+(W-L-R)*((new Date(d).getTime()-t0)/((t1-t0)||1)), y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo||1));
+  const line=(arr,col)=>arr.length?`<path d="${arr.map((p,i)=>(i?"L":"M")+x(p.d).toFixed(1)+" "+y(p.v).toFixed(1)).join(" ")}" fill="none" stroke="${col}" stroke-width="2"/>`+arr.map(p=>`<circle cx="${x(p.d).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3" fill="${col}"><title>${esc(fmtDate(p.d))}: ${pct(p.v,1)}</title></circle>`).join(""):"";
+  let g=""; for(let k=0;k<=3;k++){ const v=lo+(hi-lo)*k/3; g+=`<line x1="${L}" x2="${W-R}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" stroke="#1d2838"/><text x="${L-6}" y="${(y(v)+4).toFixed(1)}" fill="#5d6f86" font-size="10" font-family="IBM Plex Mono" text-anchor="end">${Math.round(v*100)}</text>`; }
+  const lab=`<text x="${L}" y="${H-6}" fill="#5d6f86" font-size="10" font-family="IBM Plex Mono">${esc(fmtDate(dates[0]))}</text><text x="${W-R}" y="${H-6}" fill="#5d6f86" font-size="10" font-family="IBM Plex Mono" text-anchor="end">${esc(fmtDate(dates[dates.length-1]))}</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}">${g}${line(pts,"#3fd0ff")}${line(rpts,"#ff7ad9")}${lab}</svg><div class="dim" style="font-size:12px;margin-top:4px"><span style="color:var(--cy)">━</span> Analyst${rpts.length?' <span style="color:var(--rt);margin-left:10px">━</span> Red team':""}</div>`;
+}
+
+
+// ---------- sheet ----------
+function openFactor(id){ if(!S.cur.Fmap[id]) return; S.open=id; try{ history.replaceState(null,"","#"+id);}catch(e){} renderSheet(); $("#sheet").classList.add("on"); $("#sheetbg").classList.add("on"); document.body.style.overflow="hidden"; $("#sheet").scrollTop=0; }
+function closeSheet(){ const f=S.cur&&S.cur.Fmap[S.open]; S.open=null; $("#sheet").classList.remove("on"); $("#sheetbg").classList.remove("on"); document.body.style.overflow=""; try{ history.replaceState(null,"", S.tab==="global"?location.pathname+location.search:"#"+S.tab);}catch(e){} }
+$("#sheetbg").addEventListener("click",closeSheet);
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&S.open) closeSheet(); });
+
+function renderSheet(){
+  const s=S.cur, f=s.Fmap[S.open]; if(!f) return;
+  const now=factorP(s,f,curGet), base=f.P;
+  const prevF=S.prev?S.prev.Fmap[f.id]:null; const prevP=prevF?factorP(S.prev,prevF,baseGet):null;
+  const col=riskColor(now);
+  const rp=S.red&&S.red.factors&&num(S.red.factors[f.id])?S.red.factors[f.id]:null;
+  const rnote=S.red&&S.red.notes&&S.red.notes[f.id];
+  const isNo=!!f.scope; const cty=isNo&&s.Cmap[f.scope];
+  let h=`<div class="sheet-inner"><div class="sh-top"><div class="ring" style="width:52px;height:52px">${ring(now,52,6,col)}<div class="rv" style="color:${col};font-size:16px">${rv(now)}</div></div>
+    <div class="tt"><div class="tag">${cty?esc(cty.name)+" · ":""}${esc(f.tag)} · ${band(now)}</div><h2>${esc(f.name)}</h2></div><button class="x" id="close" aria-label="Close">×</button></div>
+    <div class="sh-body"><div class="kpis">
+      <div class="kpi"><div class="k">Analyst</div><div class="v" style="color:${col}">${pct(now)}</div><div class="s">${Math.abs(now-base)>0.0005?"baseline "+pct(base):(H30?"30-day horizon":"12-month horizon")}</div></div>
+      <div class="kpi"><div class="k">Trend</div><div class="v" style="font-size:18px;padding-top:6px">${f.trend==="up"?'<span class="delta up">▲ rising</span>':f.trend==="down"?'<span class="delta down">▼ easing</span>':f.trend==="new"?'<span class="delta new">NEW</span>':'<span class="delta flat">▬ flat</span>'}</div><div class="s">analyst assessment</div></div>
+      <div class="kpi"><div class="k">Since last</div><div class="v" style="font-size:18px;padding-top:6px">${prevP!=null?deltaHTML(base,prevP):'<span class="delta new">NEW</span>'}</div><div class="s">${prevP!=null?"from "+pct(prevP):"first snapshot"}</div></div>
+      <div class="kpi"><div class="k">Severity</div><div class="v" style="font-size:18px;padding-top:6px">${pips(f.severity||3)}</div><div class="s">${f.severity||3}/5</div></div>
+    </div>
+    <div class="box out"><h4>What we measure</h4><p>${esc(f.outcome)}</p></div>
+    <div class="box"><h4>Situation</h4><p>${esc(f.summary)}</p></div>
+    <div class="box"><h4>Since last</h4><p>${esc(f.sinceLast)}</p></div>
+    ${rnote?`<div class="box rt"><h4>Red team</h4><p>${esc(rnote)}</p></div>`:""}
+    ${isNo?(f.advice?`<div class="box fl"><h4>What you can do</h4><p>${esc(f.advice)}</p></div>`:""):""}
+    <div class="box"><h4>Drivers · test scenarios</h4>`;
+  const ds=driversFor(f);
+  if(!ds.length) h+=`<p class="dim" style="font-size:13px">No modelled drivers; the figure is set directly.</p>`;
+  else h+=`<p class="dim" style="font-size:12.5px;margin-bottom:6px">Change the probability of an event to see how the factor and overall risk move. White mark = analyst baseline. "Effect" = change in this factor if the event happens vs. does not.</p>`;
+  for(const d of ds){
+    const p=pOf(d.id), eff=driverEffect(f,d), others=Object.keys(d.imp).filter(k=>k!==f.id); const isOv=S.ov[d.id]!=null;
+    const drp=S.red&&S.red.drivers&&num(S.red.drivers[d.id])?S.red.drivers[d.id]:null;
+    h+=`<div class="drv" data-d="${esc(d.id)}"><div class="row1"><div><div class="t">${esc(d.t)}</div><div class="why">${esc(d.why)}</div></div><div class="pv" style="color:${isOv?"var(--y)":"var(--txt)"}">${rv(p)}%</div></div>
+      <div class="row2"><span class="eff ${eff>=0?"pos":"neg"}">effect ${pp(eff)}</span><span class="hz">horizon ${esc(d.h)}</span>
+        ${drp!=null?`<span class="rtc">RT ${Math.round(drp*100)}%</span>`:""}
+        ${others.length?`<span class="multi">also affects ${others.map(k=>esc(s.Fmap[k]?s.Fmap[k].tag:k)).join(", ")}</span>`:""}
+        <div class="slwrap"><span class="basemark" style="left:calc(${(d.p*100).toFixed(1)}% - 1px)"></span><input type="range" min="0" max="100" step="${H30?0.5:1}" value="${H30?(p*100).toFixed(1):Math.round(p*100)}" aria-label="${esc(d.t)}"></div>
+        <button class="qbtn${p===0&&isOv?" on":""}" data-q="0">Doesn't happen</button><button class="qbtn${!isOv?" on":""}" data-q="b">Baseline</button><button class="qbtn${p===1&&isOv?" on":""}" data-q="1">Happens</button></div></div>`;
+  }
+  h+=`</div>
+    <div class="box"><h4>Sources</h4><ul class="src">${(f.sources||[]).map(x=>`<li><a href="${esc(safeUrl(x.u))}" target="_blank" rel="noopener">${esc(x.t)}</a></li>`).join("")||'<li class="dim">–</li>'}</ul></div>
+    ${(f.experts&&f.experts.length)?`<div class="box"><h4>Expert voices</h4><div class="exp">${f.experts.map(e=>`<span>${esc(e)}</span>`).join("")}</div></div>`:""}
+  </div></div>`;
+  const sh=$("#sheet"); const st=sh.scrollTop; sh.innerHTML=h; sh.scrollTop=st;
+  $("#close").addEventListener("click",closeSheet);
+  sh.querySelectorAll(".drv").forEach(el=>{ const id=el.dataset.d, d=S.cur.Dmap[id]; const r=el.querySelector("input[type=range]");
+    r.addEventListener("input",()=>{ el.querySelector(".pv").textContent=r.value+"%"; });
+    r.addEventListener("change",()=>setOv(id, r.value/100, d.p));
+    el.querySelectorAll(".qbtn").forEach(b=>b.addEventListener("click",()=>{ const q=b.dataset.q; setOv(id, q==="b"?null:+q, d.p); })); });
+}
+function setOv(id,v,base){ if(v==null||Math.abs(v-base)<0.0001) delete S.ov[id]; else S.ov[id]=v; render(); }
+$("#reset").addEventListener("click",()=>{ S.ov={}; render(); });
+
+// ---------- tabs / routing ----------
+function setTab(t, push){ S.tab=t; if(push){ try{ history.replaceState(null,"", t==="global"?location.pathname+location.search:"#"+t);}catch(e){} } render(); window.scrollTo(0,0); }
+$("#tabs").addEventListener("click",e=>{ const b=e.target.closest(".tab"); if(!b) return; if(S.open) closeSheet(); setTab(b.dataset.t,true); });
+function route(){ const h=location.hash.slice(1); if(!S.cur) return;
+  if(h==="global"||S.cur.C.some(c=>c.tab===h)){ if(S.open) closeSheet(); if(S.tab!==h) setTab(h,false); }
+  else if(h&&S.cur.Fmap[h]){ const f=S.cur.Fmap[h]; const t=f.scope?S.cur.Cmap[f.scope].tab:"global"; if(S.tab!==t){ S.tab=t; render(); } openFactor(h); }
+  else if(!h&&S.open) closeSheet(); }
+window.addEventListener("hashchange",route);
+
+
+// ---------- data ----------
+function showNote(t){ const n=$("#note"); n.textContent=t; n.classList.add("on"); }
+function hideNote(){ $("#note").classList.remove("on"); }
+function setStatus(ok,t){ $("#status").innerHTML=`<span class="dot${ok?"":" warn"}"></span>${esc(t)}`; }
+function valid(sn){ return sn && typeof sn.date==="string" && Array.isArray(sn.factors) && Array.isArray(sn.drivers) && sn.factors.every(f=>num(f.P)&&f.id); }
+let firstRender=true;
+function setSnaps(list){
+  const ok=list.filter(valid).sort((a,b)=>a.date<b.date?1:-1).map(normalize);
+  if(!ok.length){ $("#app").innerHTML='<div class="loading">No analysis has been saved yet.</div>'; setStatus(false,"Waiting for data"); return; }
+  const changed=!S.cur||S.cur.id!==ok[0].id;
+  S.snaps=ok; S.cur=ok[0]; const hz0=ok[0].horizonDays||365; S.prev=ok.slice(1).find(x=>(x.horizonDays||365)===hz0)||null; applyReds(); if(changed) S.ov={};
+  const age=(Date.now()-new Date(S.cur.generatedAt||S.cur.date).getTime())/36e5;
+  setStatus(age<36,(age<36?"Updated ":"Latest analysis ")+fmtDate(S.cur.date));
+  if(age>=36) showNote("The latest analysis is more than a day old. The daily update may be delayed.");
+  render();
+  if(firstRender){ firstRender=false; route(); }
+}
+function applyReds(){ const hz=S.cur?(S.cur.horizonDays||365):365; S.reds=(S.allReds||[]).filter(r=>(r.horizonDays||365)===hz); S.red=S.reds[0]||null; }
+function setReds(list){ S.allReds=list.filter(r=>r&&typeof r.date==="string"&&r.factors).sort((a,b)=>a.date<b.date?1:-1); applyReds(); if(S.cur) render(); }
+
+async function boot(){
+  const h=location.hash.slice(1); if(h&&h.length<=6&&!h.includes("_")) S.tab=h;
+  if(window.__TEST){ const T=window.__TEST; setReds(T.reds||[]); setSnaps(T.snaps||[]); return; }
+  try{
+    let base="data/snapshots/", r=await fetch("data/manifest.json",{cache:"no-cache"});
+    if(!r.ok){ r=await fetch("manifest.json",{cache:"no-cache"}); base=""; }
+    const m=await r.json();
+    const dates=(m.snapshots||[]).slice().sort().reverse().slice(0,120);
+    const docs=await Promise.all(dates.map(d=>fetch(base+d+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)));
+    setSnaps(docs.filter(Boolean));
+  }catch(e){ setStatus(false,"Error"); $("#app").innerHTML='<div class="loading">Could not load the analysis data.</div>'; }
+}
+boot();
+})();
+</script>
+</body>
+</html>

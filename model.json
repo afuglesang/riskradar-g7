@@ -1,0 +1,635 @@
+{
+ "name": "Risk Radar – G7 & EU",
+ "horizonDays": 30,
+ "note": "Structural model for the first snapshot. Factor IDs, names and outcome definitions are fixed; P, drivers, links, summaries and sources are set by the daily task. National crisis = an event requiring national (or EU-level) crisis management and affecting large parts of the population for several days.",
+ "globalFactors": [
+  "ai",
+  "social",
+  "bio",
+  "ukraine",
+  "mideast",
+  "taiwan",
+  "nuclear",
+  "hybrid",
+  "econ",
+  "climate"
+ ],
+ "globalSpill": {
+  "ai": 0.08,
+  "social": 0.03,
+  "bio": 0.35,
+  "ukraine": 0.005,
+  "mideast": 0.12,
+  "taiwan": 0.8,
+  "nuclear": 0.1,
+  "hybrid": 0.06,
+  "econ": 0.2,
+  "climate": 0.08
+ },
+ "method": {
+  "baseRate": 0.002,
+  "correlation": 0.85
+ },
+ "countries": [
+  {
+   "code": "us",
+   "name": "United States",
+   "place": "the United States",
+   "tab": "us",
+   "factors": [
+    {
+     "id": "us_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the Insurrection Act is invoked, active-duty forces are deployed to quell civil unrest, or a single politically motivated attack kills at least 3 people."
+    },
+    {
+     "id": "us_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year US Treasury yield closes at or above 5.50%, a major agency (S&P, Moody's, Fitch) downgrades the US, or a federal government shutdown lasts more than 7 days."
+    },
+    {
+     "id": "us_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of the United States within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "us_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in the United States (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "us_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of the United States declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers."
+    },
+    {
+     "id": "us_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in the United States within the next 30 days causing at least 50 direct deaths or insured losses of at least USD 10bn. Statistical heat excess mortality does not count."
+    }
+   ],
+   "sourcesNote": "Sources: US Treasury, Federal Reserve, CBO, DHS/CISA, FBI, NOAA/NWS, FEMA, EIA, NERC, and researchers across the political spectrum.",
+   "spill": {
+    "us_unrest": 0.25,
+    "us_fiscal": 0.1,
+    "us_terror": 0.05,
+    "us_sabotage": 0.3,
+    "us_energy": 0.2,
+    "us_hazard": 0.2,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.05,
+    "taiwan": 0.35
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "uk",
+   "name": "United Kingdom",
+   "place": "the United Kingdom",
+   "tab": "uk",
+   "factors": [
+    {
+     "id": "uk_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the Prime Minister resigns or loses a confidence vote, or emergency powers (Civil Contingencies Act) are used in response to public disorder."
+    },
+    {
+     "id": "uk_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year gilt yield closes at or above 6.00%, the Bank of England announces an emergency gilt-market intervention, or a major agency downgrades the UK."
+    },
+    {
+     "id": "uk_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of the United Kingdom within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "uk_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in the United Kingdom (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "uk_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of the United Kingdom declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers."
+    },
+    {
+     "id": "uk_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in the United Kingdom within the next 30 days causing at least 10 direct deaths or insured losses of at least GBP 1.5bn. Statistical heat excess mortality does not count."
+    }
+   ],
+   "sourcesNote": "Sources: HM Treasury, OBR, Bank of England, MI5/JTAC threat level, NCSC, National Grid ESO, Met Office, Environment Agency, and UK researchers across the political spectrum.",
+   "spill": {
+    "uk_unrest": 0.25,
+    "uk_fiscal": 0.1,
+    "uk_terror": 0.05,
+    "uk_sabotage": 0.3,
+    "uk_energy": 0.2,
+    "uk_hazard": 0.2,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.25,
+    "taiwan": 0.15
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "fr",
+   "name": "France",
+   "place": "France",
+   "tab": "fr",
+   "factors": [
+    {
+     "id": "fr_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: a decree under the law of 3 April 1955 declares an état d'urgence for public disorder, or the Assemblée nationale adopts a motion de censure that topples the government."
+    },
+    {
+     "id": "fr_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year OAT–Bund spread closes at or above 200 bp, or S&P, Moody's or Fitch lowers France's rating by at least one notch."
+    },
+    {
+     "id": "fr_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of France within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "fr_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in France (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "fr_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of France declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers. Also counts: at least 25% of filling stations short of a fuel for three consecutive days."
+    },
+    {
+     "id": "fr_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in France (overseas included) within the next 30 days causing at least 10 direct deaths or insured losses of at least EUR 1.5bn. Statistical heat excess mortality does not count."
+    }
+   ],
+   "sourcesNote": "Sources: Ministry of the Interior, PNAT/DGSI, ANSSI, INSEE, Banque de France, OFCE, RTE, Météo-France, and French researchers across the political spectrum.",
+   "spill": {
+    "fr_unrest": 0.25,
+    "fr_fiscal": 0.1,
+    "fr_terror": 0.05,
+    "fr_sabotage": 0.3,
+    "fr_energy": 0.2,
+    "fr_hazard": 0.2,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.3,
+    "taiwan": 0.15
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "de",
+   "name": "Germany",
+   "place": "Germany",
+   "tab": "de",
+   "factors": [
+    {
+     "id": "de_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the federal government collapses (coalition breaks up or the Chancellor loses a confidence vote), or an internal state of emergency (Article 91 GG) is declared."
+    },
+    {
+     "id": "de_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year Bund yield closes at or above 3.75%, Germany loses an AAA rating at any major agency, or the federal government invokes the debt-brake emergency clause for a new crisis."
+    },
+    {
+     "id": "de_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of Germany within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "de_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in Germany (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "de_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of Germany declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers. Also counts: the Bundesnetzagentur declares the gas emergency stage (Notfallstufe)."
+    },
+    {
+     "id": "de_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in Germany within the next 30 days causing at least 10 direct deaths or insured losses of at least EUR 1.5bn. Statistical heat excess mortality does not count."
+    }
+   ],
+   "sourcesNote": "Sources: Bundesfinanzministerium, Bundesbank, ifo/IfW/DIW, BfV, BSI, Bundesnetzagentur, DWD, and German researchers across the political spectrum.",
+   "spill": {
+    "de_unrest": 0.25,
+    "de_fiscal": 0.1,
+    "de_terror": 0.05,
+    "de_sabotage": 0.3,
+    "de_energy": 0.2,
+    "de_hazard": 0.2,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.3,
+    "taiwan": 0.15
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "it",
+   "name": "Italy",
+   "place": "Italy",
+   "tab": "it",
+   "factors": [
+    {
+     "id": "it_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government resigns or loses a confidence vote, or a national state of emergency is declared in response to public disorder."
+    },
+    {
+     "id": "it_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year BTP–Bund spread closes at or above 250 bp, or S&P, Moody's, Fitch or DBRS lowers Italy's rating by at least one notch."
+    },
+    {
+     "id": "it_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of Italy within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "it_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in Italy (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "it_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of Italy declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers."
+    },
+    {
+     "id": "it_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in Italy within the next 30 days causing at least 10 direct deaths or insured losses of at least EUR 1.5bn. Statistical heat excess mortality does not count. Also counts: an evacuation order of at least 10,000 people (e.g. Campi Flegrei)."
+    },
+    {
+     "id": "it_water",
+     "name": "Water-scarcity emergency",
+     "tag": "Water",
+     "severity": 2,
+     "outcome": "Within the next 30 days: the Council of Ministers declares or extends a state of emergency for water scarcity (crisi idrica) in any region, or drinking-water rationing affects at least 500,000 people."
+    },
+    {
+     "id": "it_migration",
+     "name": "Migration emergency",
+     "tag": "Migration",
+     "severity": 2,
+     "outcome": "Within the next 30 days: at least 15,000 sea arrivals in a calendar month (Ministry of the Interior data), or a national state of emergency for migration is declared."
+    }
+   ],
+   "sourcesNote": "Sources: Ministero dell'Interno, MEF, Banca d'Italia, Istat, UPB, ACN (cyber), Terna/SNAM/ARERA, Protezione Civile, INGV, ISPI/IAI, and Italian researchers across the political spectrum.",
+   "spill": {
+    "it_unrest": 0.25,
+    "it_fiscal": 0.1,
+    "it_terror": 0.05,
+    "it_sabotage": 0.3,
+    "it_energy": 0.2,
+    "it_hazard": 0.2,
+    "it_water": 0.2,
+    "it_migration": 0.1,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.3,
+    "taiwan": 0.15
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "jp",
+   "name": "Japan",
+   "place": "Japan",
+   "tab": "jp",
+   "factors": [
+    {
+     "id": "jp_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the Prime Minister resigns or the Cabinet loses a no-confidence vote, or a state of emergency is declared in response to public disorder."
+    },
+    {
+     "id": "jp_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year JGB yield closes at or above 2.50%, the Bank of Japan conducts an unscheduled emergency bond-buying operation, or a major agency downgrades Japan."
+    },
+    {
+     "id": "jp_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of Japan within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "jp_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in Japan (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "jp_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of Japan declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers."
+    },
+    {
+     "id": "jp_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in Japan within the next 30 days causing at least 50 direct deaths or insured losses of at least JPY 1.5trn. Statistical heat excess mortality does not count. Also counts: a Nankai Trough 'megaquake advisory' (JMA)."
+    },
+    {
+     "id": "jp_dprk",
+     "name": "North Korean missile over or into Japan",
+     "tag": "Missile",
+     "severity": 3,
+     "outcome": "Within the next 30 days: a North Korean missile overflies Japanese territory, lands inside Japan's EEZ, or triggers a J-Alert evacuation warning."
+    }
+   ],
+   "sourcesNote": "Sources: Ministry of Finance, Bank of Japan, Cabinet Office, Ministry of Defense, NISC, JMA, METI/OCCTO, Japan-based researchers (e.g. JIIA, Sasakawa Peace Foundation) and regional analysts.",
+   "spill": {
+    "jp_unrest": 0.25,
+    "jp_fiscal": 0.1,
+    "jp_terror": 0.05,
+    "jp_sabotage": 0.3,
+    "jp_energy": 0.2,
+    "jp_hazard": 0.2,
+    "jp_dprk": 0.2,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.03,
+    "taiwan": 0.5
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "ca",
+   "name": "Canada",
+   "place": "Canada",
+   "tab": "ca",
+   "factors": [
+    {
+     "id": "ca_unrest",
+     "name": "Government crisis or unrest emergency",
+     "tag": "Politics",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the federal government falls (loses a confidence vote or the Prime Minister resigns), or the Emergencies Act is invoked."
+    },
+    {
+     "id": "ca_fiscal",
+     "name": "Fiscal and bond-market stress",
+     "tag": "Fiscal",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the 10-year Government of Canada bond yield closes at or above 4.50%, or a major agency downgrades Canada."
+    },
+    {
+     "id": "ca_terror",
+     "name": "Deadly terrorist attack",
+     "tag": "Terror",
+     "severity": 3,
+     "outcome": "An attack on the territory of Canada within the next 30 days that kills at least one person other than the perpetrator and is treated as terrorism by the national authorities."
+    },
+    {
+     "id": "ca_sabotage",
+     "name": "State-attributed sabotage or destructive cyberattack",
+     "tag": "Sabotage",
+     "severity": 3,
+     "outcome": "Physical sabotage or a destructive cyberattack against critical infrastructure in Canada (energy, transport, telecoms, subsea cables, water, health, payments) within the next 30 days that disrupts service for at least 24 hours or 100,000 users and is publicly attributed by the government to a foreign state or its proxies."
+    },
+    {
+     "id": "ca_energy",
+     "name": "Energy supply crisis",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the government of Canada declares an energy supply emergency, orders rationing of fuel, gas or electricity, or the grid operator carries out rolling load-shedding of household consumers."
+    },
+    {
+     "id": "ca_hazard",
+     "name": "Natural-hazard national crisis",
+     "tag": "Nature",
+     "severity": 3,
+     "outcome": "A single natural-hazard event (flood, storm, wildfire, earthquake, landslide, volcanic event) in Canada within the next 30 days causing at least 10 direct deaths or insured losses of at least CAD 2bn. Statistical heat excess mortality does not count."
+    },
+    {
+     "id": "ca_trade",
+     "name": "US trade rupture",
+     "tag": "Trade",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the United States imposes new or raised tariffs covering at least CAD 20bn of Canadian exports, or formally notifies withdrawal from USMCA/CUSMA."
+    }
+   ],
+   "sourcesNote": "Sources: Finance Canada, Bank of Canada, PBO, CSIS, CSE (Canadian Centre for Cyber Security), Public Safety Canada, ECCC, and Canadian researchers across the political spectrum.",
+   "spill": {
+    "ca_unrest": 0.25,
+    "ca_fiscal": 0.1,
+    "ca_terror": 0.05,
+    "ca_sabotage": 0.3,
+    "ca_energy": 0.2,
+    "ca_hazard": 0.2,
+    "ca_trade": 0.15,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.05,
+    "taiwan": 0.15
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  },
+  {
+   "code": "eu",
+   "name": "European Union",
+   "place": "the EU",
+   "tab": "eu",
+   "factors": [
+    {
+     "id": "eu_eurozone",
+     "name": "Euro-area market stress",
+     "tag": "Euro",
+     "severity": 4,
+     "outcome": "Within the next 30 days: the ECB activates the Transmission Protection Instrument (TPI), or any euro-area 10-year sovereign spread to Bunds closes at or above 300 bp."
+    },
+    {
+     "id": "eu_cohesion",
+     "name": "EU decision-making breakdown",
+     "tag": "Cohesion",
+     "severity": 3,
+     "outcome": "Within the next 30 days: EU sanctions on Russia lapse because renewal is blocked, a member state vetoes agreed Ukraine financing so that a scheduled payment is missed, or the Council votes under Article 7(1) or 7(2) TEU."
+    },
+    {
+     "id": "eu_attack",
+     "name": "Armed attack on an EU member",
+     "tag": "Defence",
+     "severity": 5,
+     "outcome": "Within the next 30 days: a state military attack (missile, drone, armed incursion) on the territory of an EU member state causing deaths, or any member invokes Article 42(7) TEU."
+    },
+    {
+     "id": "eu_energy",
+     "name": "EU-wide energy emergency",
+     "tag": "Energy",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the Council declares a Union alert under the gas security-of-supply rules, or the TTF front-month gas price averages above EUR 100/MWh over any 5 consecutive trading days."
+    },
+    {
+     "id": "eu_trade",
+     "name": "US–EU trade escalation",
+     "tag": "Trade",
+     "severity": 3,
+     "outcome": "Within the next 30 days: the US raises tariffs on EU goods by at least 10 percentage points on a broad basis, or EU countermeasures enter into force."
+    },
+    {
+     "id": "eu_migration",
+     "name": "EU migration crisis mechanism",
+     "tag": "Migration",
+     "severity": 2,
+     "outcome": "Within the next 30 days: the crisis and force-majeure regulation is activated for any member state, or a member suspends asylum or Schengen rules citing an emergency (new suspension, not a routine extension)."
+    }
+   ],
+   "sourcesNote": "Sources: European Commission, Council, ECB, ESMA/EBA, ENISA, ACER/ENTSOG, Frontex, Bruegel, ECFR, CEPS, EPC and researchers from several member states.",
+   "spill": {
+    "eu_eurozone": 0.4,
+    "eu_cohesion": 0.3,
+    "eu_attack": 0.8,
+    "eu_energy": 0.4,
+    "eu_trade": 0.2,
+    "eu_migration": 0.2,
+    "bio": 0.4,
+    "econ": 0.3,
+    "mideast": 0.1,
+    "nuclear": 0.1,
+    "climate": 0.1,
+    "social": 0.05,
+    "ukraine": 0.002,
+    "ai": 0.05,
+    "hybrid": 0.3,
+    "taiwan": 0.15
+   },
+   "baseRate": 0.001,
+   "correlation": 0.85
+  }
+ ]
+}
